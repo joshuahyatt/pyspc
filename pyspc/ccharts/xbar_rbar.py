@@ -12,6 +12,8 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+# Modified by Joshua Hyatt <joshua_hyatt@denso-diam.com>
 
 from .ccharts import ccharts
 from .tables import A2, D3, D4
@@ -33,16 +35,16 @@ class xbar_rbar(ccharts):
             R.append(max(xs) - min(xs))
             X.append(np.mean(xs))
 
-        if newdata:
-            newvalues = [np.mean(xs) for xs in newdata]
-
         Rbar = np.mean(R)  # center
         Xbar = np.mean(X)
 
         lcl = Xbar - A2[size] * Rbar
         ucl = Xbar + A2[size] * Rbar
 
-        return (X, Xbar, lcl, ucl, self._title)
+        if newdata is not None:
+            newvalues = [np.mean(xs) for xs in newdata]
+
+        return (X, Xbar, lcl, ucl, self._title, newvalues)
 
 
 class rbar(ccharts):
@@ -59,12 +61,12 @@ class rbar(ccharts):
             assert len(xs) == size
             R.append(max(xs) - min(xs))
 
-        if newdata:
-            newvalues = [max(xs) - min(xs) for xs in newdata]
-
         Rbar = np.mean(R)  # center
 
         lcl = D3[size] * Rbar
         ucl = D4[size] * Rbar
 
-        return (R, Rbar, lcl, ucl, self._title)
+        if newdata is not None:
+            newvalues = [max(xs) - min(xs) for xs in newdata]
+
+        return (R, Rbar, lcl, ucl, self._title, newvalues)
