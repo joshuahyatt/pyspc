@@ -14,6 +14,8 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+# Mofified by Joshua Hyatt <joshua_hyatt@denso-diam.com>
 
 import numpy as np
 import matplotlib.ticker as mtick
@@ -22,10 +24,10 @@ import matplotlib.ticker as mtick
 class PlotCharts(object):
     """docstring for PlotCharts"""
 
-    def __init__(self, ax, values, center, lcl, ucl, title):
+    def __init__(self, ax, values, center, lcl, ucl, title, newvalues):
         super(PlotCharts, self).__init__()
 
-        self.plot_chart(ax, values, center, lcl, ucl, title)
+        self.plot_chart(ax, values, center, lcl, ucl, title, newvalues)
 
     def plot_chart(self, ax, values, center, lcl, ucl, title, newvalues=None):
 
@@ -36,7 +38,7 @@ class PlotCharts(object):
         if isinstance(values[0], list):
             num = len(values[0])
 
-        if newvalues:
+        if newvalues is not None:
             ax.plot([num - 0.5] * 2, [lcl, ucl], 'k--')
             ax.plot(values + newvalues, 'bo--')
             num += len(newvalues)
