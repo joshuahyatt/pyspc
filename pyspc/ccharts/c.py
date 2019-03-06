@@ -12,6 +12,8 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+# Modified by Joshua Hyatt <joshua_hyatt@denso-diam.com>
 
 from .ccharts import ccharts
 import numpy as np
@@ -39,10 +41,5 @@ class c(ccharts):
 
         lcl = cbar - 3 * np.sqrt(cbar)
         ucl = cbar + 3 * np.sqrt(cbar)
-#
-#        ax.plot([0, len(data)], [cbar, cbar], 'k-')
-#        ax.plot([0, len(data)], [lcl, lcl], 'r:')
-#        ax.plot([0, len(data)], [ucl, ucl], 'r:')
-#        ax.plot(data, 'bo-')
 
-        return (data, cbar, lcl, ucl, self._title)
+        return (data, cbar, lcl, ucl, self._title, newdata)
