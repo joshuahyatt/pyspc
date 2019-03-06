@@ -12,6 +12,8 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+# Modified by Joshua Hyatt <joshua_hyatt@denso-diam.com>
 
 from .ccharts import ccharts
 import numpy as np
@@ -49,7 +51,7 @@ class p(ccharts):
             if ucl > 1:
                 ucl = 1
 
-            return (data2, pbar, lcl, ucl, self._title)
+            return (data2, pbar, lcl, ucl, self._title, newdata)
 
         else:
             lcl, ucl = [], []
@@ -57,4 +59,4 @@ class p(ccharts):
                 lcl.append(pbar - 3 * np.sqrt((pbar * (1 - pbar)) / size))
                 ucl.append(pbar + 3 * np.sqrt((pbar * (1 - pbar)) / size))
 
-            return (data2, pbar, lcl, ucl, self._title)
+            return (data2, pbar, lcl, ucl, self._title, newdata)
