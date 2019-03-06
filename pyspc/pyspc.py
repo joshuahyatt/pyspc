@@ -14,9 +14,11 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+# Modified by Joshua Hyatt <joshua_hyatt@denso-diam.com
 
-# from __future__ import (absolute_import, division, print_function,
-#                         unicode_literals)
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
 from .results import PlotCharts
 
 import matplotlib.pyplot as plt
@@ -30,22 +32,6 @@ mpl.rcParams['lines.markersize'] = 4
 
 
 class spc(object):
-    """
-    spc is the main class of the library. It receive the data, plot the chart
-    drop values and save the image to a file.
-
-    :param data: Can be a list, nested list, numpy.array or pandas.Dataframe
-    :param newdata: the same of above
-
-    :Example:
-
-    >>> import numpy
-    >>> from pyspc import *
-    >>> fake_data = numpy.random.randn(30, 5) + 100
-    >>> chart1 = spc(fake_data) + xbar_rbar() + rbar() + rules()
-    >>> print(chart1)
-
-    """
 
     _title = 'SPC : Statistical Process Control Charts for Humans'
 
@@ -81,49 +67,48 @@ class spc(object):
             yield x
 
     def get_subplots(self):
+
         if len(self.layers) > 1:
             return self.subplots[0]
         return self.subplots
 
-    def save(self, filename, **kwargs):
-        """
-        Save the chart to a image file.
-
-        :param filename: name of the image file, if no extenssion is provide it will be save as '.png'.
-        :param **kwargs: see matplotlib.figure.Figure.savefig for more details. 
-        """
+    def save(self, filename, **kargs):
         if len(self.summary) == 0:
             self.make()
 
-        self.fig.savefig(filename, **kwargs)
+        self.fig.savefig(filename, **kargs)
 
     def drop(self, *args):
         self.data = np.delete(self.data, args, axis=0)
 
-    def make(self, **kwargs):
+    def make(self):
+
         num_layers = len(self.layers)
         if num_layers == 0:
             plt.show()
             return
 
-        self.fig, *self.subplots = plt.subplots(num_layers, **kwargs)
+        self.fig, *self.subplots = plt.subplots(num_layers)
         self.fig.canvas.set_window_title(self._title)
 
         for layer, ax in zip(self.layers, self.get_subplots()):
             summary = {}
 
-            values, center, lcl, ucl, title = layer.plot(self.data, self.size, self.newdata)
-            PlotCharts(ax, values, center, lcl, ucl, title)
+            values, center, lcl, ucl, title, newvalues = layer.plot(self.data, self.size, self.newdata)
+            PlotCharts(ax, values, center, lcl, ucl, title, newvalues)
 
             summary['name'] = title
             summary['values'] = values
             summary['lcl'] = lcl
             summary['ucl'] = ucl
             summary['center'] = center
+            summary['newvalues'] = newvalues
 
             if self.points is not None:
+                if newvalues is not None:
+                    values = values + newvalues
                 summary['violation-points'] = self.points.plot_violation_points(ax, values, center, lcl, ucl)
 
-            self.summary = summary
+            self.summary.append(summary)
 
         self.fig.tight_layout()
