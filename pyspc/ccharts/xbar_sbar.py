@@ -12,6 +12,8 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+# Modified by Joshua Hyatt <joshua_hyatt@denso-diam.com>
 
 from .ccharts import ccharts
 from .tables import A3, B3, B4
@@ -34,16 +36,16 @@ class xbar_sbar(ccharts):
             S.append(np.std(xs, ddof=1))
             X.append(np.mean(xs))
 
-        if newdata:
-            newvalues = [np.mean(xs) for xs in newdata]
-
         sbar = np.mean(S)
         xbar = np.mean(X)
 
         lclx = xbar - A3[size] * sbar
         uclx = xbar + A3[size] * sbar
-
-        return (X, xbar, lclx, uclx, self._title)
+        
+        if newdata is not None:
+            newvalues = [np.mean(xs) for xs in newdata]
+        
+        return (X, xbar, lclx, uclx, self._title, newvalues)
 
 
 class sbar(ccharts):
@@ -61,12 +63,12 @@ class sbar(ccharts):
             assert len(xs) == size
             S.append(np.std(xs, ddof=1))
 
-        if newdata:
-            newvalues = [np.std(xs, ddof=1) for xs in newdata]
-
         sbar = np.mean(S)
 
         lcls = B3[size] * sbar
         ucls = B4[size] * sbar
 
-        return (S, sbar, lcls, ucls, self._title)
+        if newdata:
+            newvalues = [np.std(xs, ddof=1) for xs in newdata]        
+        
+        return (S, sbar, lcls, ucls, self._title, newvalues)
