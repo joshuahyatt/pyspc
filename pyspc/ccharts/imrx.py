@@ -12,6 +12,8 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+# Modified by Joshua Hyatt <joshua_hyatt@denso-diam.com>
 
 from .ccharts import ccharts
 from .tables import d2
@@ -60,4 +62,4 @@ class imrx(ccharts):
         ucl_xbar = xbar + 3 * (mrbar / d2[2])
         lcl_xbar = xbar - 3 * (mrbar / d2[2])
 
-        return (sample_mean, xbar, lcl_xbar, ucl_xbar, self._title)
+        return (sample_mean, xbar, lcl_xbar, ucl_xbar, self._title, newdata)
