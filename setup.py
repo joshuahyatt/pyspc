@@ -18,7 +18,7 @@
 from setuptools import setup, find_packages
 
 setup(name='pyspc',
-      version='0.5',
+      version='0.5.1',
       description='Statistical Process Control Charts Library for Humans',
       long_description='Statistical Process Control Charts Library for Humans',
       url='https://github.com/carlosqsilva/pyspc',
