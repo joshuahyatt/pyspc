@@ -14,6 +14,8 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+# Modified by Joshua Hyatt <joshua_hyatt@denso-diam.com>
 
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
@@ -41,3 +43,4 @@ warnings.simplefilter("ignore")
 from .ccharts import *
 from .pyspc import spc
 from .rules import rules
+from .sampledata import *
