@@ -12,6 +12,8 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+# Modified by Joshua Hyatt <joshua_hyatt@denso-diam.com>
 
 from .ccharts import ccharts
 import numpy as np
@@ -61,10 +63,4 @@ class cusum(ccharts):
         ucl = interval * std
         center = 0
 
-#        ax.plot([0, len(cplus)], [center, center], 'k-')
-#        ax.plot([0, len(cplus)], [lcl, lcl], 'r:')
-#        ax.plot([0, len(cplus)], [ucl, ucl], 'r:')
-#        ax.plot(cplus, 'bo--')
-#        ax.plot(cminus, 'bo--')
-
-        return ([cplus, cminus], center, lcl, ucl, self._title)
+        return ([cplus, cminus], center, lcl, ucl, self._title, newdata)
