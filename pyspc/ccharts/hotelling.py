@@ -45,6 +45,7 @@ def var_cov(var, s):
 class Tsquare_single(ccharts):
     def __init__(self, alpha = .5):
         self.alpha = alpha
+        self.ccharts.__init__()
         
     _title = "T-square Hotelling Chart"
 
@@ -74,6 +75,7 @@ class Tsquare_single(ccharts):
 class Tsquare(ccharts):
     def __init__(self, alpha = .5):
         self.alpha = alpha
+        self.ccharts.__init__()
         
     _title = "T-square Hotelling Chart"
 
