@@ -12,6 +12,8 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+# Modified by Joshua Hyatt <joshua_hyatt@denso-diam.com>
 
 from .ccharts import ccharts
 from .tables import D3, D4
@@ -58,9 +60,4 @@ class imrmr(ccharts):
         ucl_mr = D4[2] * mrbar
         lcl_mr = D3[2] * mrbar
 
-#        ax.plot([0, num_samples], [mrbar, mrbar], 'k-')
-#        ax.plot([0, num_samples], [lcl_mr, lcl_mr], 'r:')
-#        ax.plot([0, num_samples], [ucl_mr, ucl_mr], 'r:')
-#        ax.plot(sample_mr, 'bo--')
-
-        return (sample_mr, mrbar, lcl_mr, ucl_mr, self._title)
+        return (sample_mr, mrbar, lcl_mr, ucl_mr, self._title, newdata)
