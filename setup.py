@@ -18,7 +18,7 @@
 from setuptools import setup, find_packages
 
 setup(name='pyspc',
-      version='0.45',
+      version='0.5',
       description='Statistical Process Control Charts Library for Humans',
       long_description='Statistical Process Control Charts Library for Humans',
       url='https://github.com/carlosqsilva/pyspc',
@@ -33,7 +33,7 @@ setup(name='pyspc',
       test_suite="tests",
       keywords='SPC QCC CEQ CEP UEPA',
       classifiers=[
-      'Development Status :: 4 - Beta',
+      'Development Status :: 5 - Beta',
       'Intended Audience :: Developers',
       'Intended Audience :: Science/Research',
       'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
