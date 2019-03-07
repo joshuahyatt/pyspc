@@ -69,7 +69,7 @@ class Tsquare_single(ccharts):
         center = cl * beta.ppf(0.5, size / 2, (numsample - size - 1) / 2)
         ucl = cl * beta.ppf(self.alpha/2, size / 2, (numsample - size - 1) / 2)
 
-        return (values, center, lcl, ucl, self._title)
+        return (values, center, lcl, ucl, self._title, newdata)
 
 
 class Tsquare(ccharts):
@@ -120,7 +120,7 @@ class Tsquare(ccharts):
         center = (p1 / p2) * f.ppf(0.50, p, p2)
         ucl = (p1 / p2) * f.ppf(1-self.alpha/2, p, p2)
 
-        return (values, center, lcl, ucl, self._title)
+        return (values, center, lcl, ucl, self._title, newdata)
 
 
 class variation(ccharts):
