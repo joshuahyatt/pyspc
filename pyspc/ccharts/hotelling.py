@@ -43,7 +43,9 @@ def var_cov(var, s):
 
 
 class Tsquare_single(ccharts):
-
+    def __init__(self, alpha = .5):
+        self.alpha = alpha
+        
     _title = "T-square Hotelling Chart"
 
     def plot(self, data, size, newdata=None):
@@ -62,15 +64,17 @@ class Tsquare_single(ccharts):
             values.append(value)
 
         cl = ((numsample - 1)**2) / numsample
-        lcl = cl * beta.ppf(0.00135, size / 2, (numsample - size - 1) / 2)
+        lcl = cl * beta.ppf(self.alpha/2, size / 2, (numsample - size - 1) / 2)
         center = cl * beta.ppf(0.5, size / 2, (numsample - size - 1) / 2)
-        ucl = cl * beta.ppf(0.99865, size / 2, (numsample - size - 1) / 2)
+        ucl = cl * beta.ppf(self.alpha/2, size / 2, (numsample - size - 1) / 2)
 
         return (values, center, lcl, ucl, self._title)
 
 
 class Tsquare(ccharts):
-
+    def __init__(self, alpha = .5):
+        self.alpha = alpha
+        
     _title = "T-square Hotelling Chart"
 
     def plot(self, data, size, newdata=None):
@@ -110,9 +114,9 @@ class Tsquare(ccharts):
 
         p1 = (p * (m - 1) * (n - 1))
         p2 = (m * n - m - p + 1)
-        lcl = (p1 / p2) * f.ppf(0.00135, p, p2)
+        lcl = (p1 / p2) * f.ppf(self.alpha/2, p, p2)
         center = (p1 / p2) * f.ppf(0.50, p, p2)
-        ucl = (p1 / p2) * f.ppf(0.99865, p, p2)
+        ucl = (p1 / p2) * f.ppf(1-self.alpha/2, p, p2)
 
         return (values, center, lcl, ucl, self._title)
 
