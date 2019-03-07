@@ -12,6 +12,8 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+# Modified by Joshua Hyatt <joshua_hyatt@denso-diam.com>
 
 from .ccharts import ccharts
 import numpy as np
@@ -58,12 +60,7 @@ class ewma(ccharts):
             lcl.append(target - 3 * (std) * np.sqrt((weight / (2 - weight)) * (1 - (1 - weight)**(2 * i))))
             ucl.append(target + 3 * (std) * np.sqrt((weight / (2 - weight)) * (1 - (1 - weight)**(2 * i))))
 
-#        ax.plot([0, len(ewma)], [target, target], 'k-')
-#        ax.plot(lcl, 'r:')
-#        ax.plot(ucl, 'r:')
-#        ax.plot(ewma, 'bo--')
-
-        return (ewma, target, lcl, ucl, self._title)
+        return (ewma, target, lcl, ucl, self._title, newdata)
 
 class mewma(ccharts):
 
@@ -103,4 +100,4 @@ class mewma(ccharts):
             t2.append((z[i].T @ inv) @ z[i])
 
         ucl = h4[int(self.lambd * 10) - 1][ncol - 1]
-        return(t2, 0, 0, ucl, self._title)
+        return(t2, 0, 0, ucl, self._title, newdata)
