@@ -67,7 +67,7 @@ class Tsquare_single(ccharts):
         cl = ((numsample - 1)**2) / numsample
         lcl = cl * beta.ppf(self.alpha/2, size / 2, (numsample - size - 1) / 2)
         center = cl * beta.ppf(0.5, size / 2, (numsample - size - 1) / 2)
-        ucl = cl * beta.ppf(self.alpha/2, size / 2, (numsample - size - 1) / 2)
+        ucl = cl * beta.ppf(1-self.alpha/2, size / 2, (numsample - size - 1) / 2)
 
         return (values, center, lcl, ucl, self._title, newdata)
 
