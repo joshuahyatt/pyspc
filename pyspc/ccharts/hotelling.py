@@ -12,6 +12,8 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+# Modified by Joshua Hyatt <joshua_hyatt@denso-diam.com>
 
 from .ccharts import ccharts
 from.tables import B3, B4
@@ -66,7 +68,7 @@ class Tsquare_single(ccharts):
         center = cl * beta.ppf(0.5, size / 2, (numsample - size - 1) / 2)
         ucl = cl * beta.ppf(0.99865, size / 2, (numsample - size - 1) / 2)
 
-        return (values, center, lcl, ucl, self._title)
+        return (values, center, lcl, ucl, self._title, newdata)
 
 
 class Tsquare(ccharts):
@@ -114,7 +116,7 @@ class Tsquare(ccharts):
         center = (p1 / p2) * f.ppf(0.50, p, p2)
         ucl = (p1 / p2) * f.ppf(0.99865, p, p2)
 
-        return (values, center, lcl, ucl, self._title)
+        return (values, center, lcl, ucl, self._title, newdata)
 
 
 class variation(ccharts):
@@ -139,4 +141,4 @@ class variation(ccharts):
         lcl = B3[size + 1] * sbar
         ucl = B4[size + 1] * sbar
 
-        return (svalues, sbar, lcl, ucl, self._title)
+        return (svalues, sbar, lcl, ucl, self._title, newdata)
