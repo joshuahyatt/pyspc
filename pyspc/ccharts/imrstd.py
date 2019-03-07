@@ -12,6 +12,8 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+# Modified by Joshua Hyatt <joshua_hyatt@denso-diam.com>
 
 from .ccharts import ccharts
 from .tables import B3, B4
@@ -52,4 +54,4 @@ class imrstd(ccharts):
         ucl_std = B4[sample_size] * sbar
         lcl_std = B3[sample_size] * sbar
 
-        return (sample_std, sbar, lcl_std, ucl_std, self._title)
+        return (sample_std, sbar, lcl_std, ucl_std, self._title, newdata)
