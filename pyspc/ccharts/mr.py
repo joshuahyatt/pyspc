@@ -12,6 +12,8 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+# Modified by Joshua Hyatt <joshua_hyatt@denso-diam.com>
 
 from .ccharts import ccharts
 from .tables import D4, D3, d2
@@ -28,7 +30,7 @@ class mr(ccharts):
 
         R = np.array([np.nan] + [abs(data[i] - data[i + 1]) for i in range(len(data) - 1)])
 
-        if newdata:
+        if newdata is not None:
             newdata = data[-1:] + newdata
             n = len(newdata)
             newvalues = [abs(newdata[i] - newdata[i + 1]) for i in range(n - 1)]
@@ -38,7 +40,7 @@ class mr(ccharts):
         lclr = D3[2] * Rbar
         uclr = D4[2] * Rbar
 
-        return (R, Rbar, lclr, uclr, self._title)
+        return (R, Rbar, lclr, uclr, self._title, newvalues)
 
 
 class xmr(ccharts):
@@ -51,7 +53,7 @@ class xmr(ccharts):
 
         R = np.array([np.nan] + [abs(data[i] - data[i + 1]) for i in range(len(data) - 1)])
 
-        if newdata:
+        if newdata is not None:
             newvalues = newdata
 
         Rbar = np.nanmean(R)
@@ -60,4 +62,4 @@ class xmr(ccharts):
         lclx = Xbar - 3 * (Rbar / d2[2])
         uclx = Xbar + 3 * (Rbar / d2[2])
 
-        return (data, Xbar, lclx, uclx, self._title)
+        return (data, Xbar, lclx, uclx, self._title, newvalues)
